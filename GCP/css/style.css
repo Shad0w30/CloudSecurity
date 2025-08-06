@@ -1,0 +1,21 @@
+:root {
+    --gcp-blue: #4285F4;
+    --gcp-red: #EA4335;
+    --gcp-yellow: #FBBC05;
+    --gcp-green: #34A853;
+    --gcp-light: #F8F9FA;
+    --security-red: #D13313;
+    --performance-green: #107C10;
+    --compliance-purple: #881798;
+    --governance-orange: #CA5010;
+}
+
+.gcp-header {
+    background: linear-gradient(135deg, var(--gcp-blue) 0%, var(--gcp-green) 100%);
+}
+
+.gcp-bg {
+    background: linear-gradient(135deg, #f5f9fc 0%, #e8f0fe 100%);
+}
+
+/* Additional GCP-specific styles can be added here */

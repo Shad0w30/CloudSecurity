@@ -15,22 +15,11 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          
-      - name: Install dependencies
-        run: npm install
-        
-      - name: Build (if needed)
-        run: npm run build
         
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -38,7 +27,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist' # or '.' if no build step
+          path: '.'
           
       - name: Deploy to GitHub Pages
         id: deployment

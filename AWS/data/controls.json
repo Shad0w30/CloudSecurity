@@ -3,29 +3,549 @@
     {
       "id": "identity",
       "name": "Identity",
-      "description": "IAM, authentication, and authorization controls",
+      "description": "Secure authentication, authorization, and identity management controls",
       "domains": [
         {
-          "name": "IAM Security",
+          "name": "Authentication Controls",
           "icon": "M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4",
           "controls": [
             {
-              "name": "IAM Root Account Protection",
+              "name": "Multi-Factor Authentication",
               "items": [
-                "Enable MFA for root account",
-                "Delete root account access keys",
-                "Use IAM users instead of root",
-                "Monitor root account activity"
+                "Enforce MFA for all users, especially admins",
+                "Implement Conditional Access policies",
+                "Consider passwordless authentication",
+                "Use Azure AD Identity Protection"
               ],
               "maturity": ["Basic", "Intermediate", "Advanced"]
             },
             {
-              "name": "IAM Policy Management",
+              "name": "Privileged Identity Management",
               "items": [
-                "Follow principle of least privilege",
-                "Use customer managed policies",
-                "Implement permission boundaries",
-                "Regularly review unused permissions"
+                "Implement Just-In-Time access",
+                "Require approval for privileged roles",
+                "Set maximum activation durations",
+                "Configure access reviews"
+              ],
+              "maturity": ["Intermediate", "Advanced"]
+            },
+            {
+              "name": "Service Principal Security",
+              "items": [
+                "Use Managed Identities where possible",
+                "Rotate credentials regularly",
+                "Restrict permissions with least privilege",
+                "Monitor for anomalous usage"
+              ],
+              "maturity": ["Intermediate", "Advanced"]
+            }
+          ]
+        },
+        {
+          "name": "Authorization Controls",
+          "icon": "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+          "controls": [
+            {
+              "name": "Role-Based Access Control",
+              "items": [
+                "Use built-in roles when possible",
+                "Create custom roles for specific needs",
+                "Implement attribute-based access control",
+                "Regularly review role assignments"
+              ],
+              "maturity": ["Basic", "Intermediate"]
+            },
+            {
+              "name": "Resource Locks",
+              "items": [
+                "Apply Delete locks to critical resources",
+                "Use ReadOnly locks where appropriate",
+                "Exempt certain resources from locks",
+                "Document lock exceptions"
+              ],
+              "maturity": ["Basic", "Intermediate"]
+            },
+            {
+              "name": "Cross-Tenant Access",
+              "items": [
+                "Restrict external collaboration",
+                "Review cross-tenant access settings",
+                "Monitor for suspicious cross-tenant activities",
+                "Use Azure AD B2B for controlled access"
+              ],
+              "maturity": ["Intermediate", "Advanced"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "network",
+      "name": "Network",
+      "description": "Protecting network infrastructure and controlling traffic flow",
+      "domains": [
+        {
+          "name": "Network Segmentation",
+          "icon": "M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z",
+          "controls": [
+            {
+              "name": "Hub-Spoke Architecture",
+              "items": [
+                "Centralize security services in hub VNet",
+                "Isolate workloads in spoke VNets",
+                "Use VNet peering with appropriate controls",
+                "Implement network virtual appliances"
+              ],
+              "maturity": ["Intermediate", "Advanced"]
+            },
+            {
+              "name": "Network Security Groups",
+              "items": [
+                "Deny all inbound by default",
+                "Allow only required ports/protocols",
+                "Use application security groups",
+                "Regularly audit NSG rules"
+              ],
+              "maturity": ["Basic", "Intermediate"]
+            },
+            {
+              "name": "Private Endpoints",
+              "items": [
+                "Use for all PaaS services when possible",
+                "Disable public network access",
+                "Integrate with DNS private zones",
+                "Monitor for private endpoint bypass attempts"
+              ],
+              "maturity": ["Intermediate", "Advanced"]
+            }
+          ]
+        },
+        {
+          "name": "Threat Protection",
+          "icon": "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z",
+          "controls": [
+            {
+              "name": "Azure Firewall",
+              "items": [
+                "Implement centralized firewall policy",
+                "Enable threat intelligence-based filtering",
+                "Configure IDPS (Intrusion Detection/Prevention)",
+                "Log and monitor all traffic"
+              ],
+              "maturity": ["Intermediate", "Advanced"]
+            },
+            {
+              "name": "DDoS Protection",
+              "items": [
+                "Enable Standard tier for critical apps",
+                "Configure alerts for potential attacks",
+                "Implement rate limiting in apps",
+                "Regularly test DDoS resilience"
+              ],
+              "maturity": ["Basic", "Intermediate", "Advanced"]
+            },
+            {
+              "name": "Web Application Firewall",
+              "items": [
+                "Deploy on Application Gateway or Front Door",
+                "Enable OWASP core rule set",
+                "Configure custom rules for your app",
+                "Monitor and tune false positives"
+              ],
+              "maturity": ["Intermediate", "Advanced"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "data",
+      "name": "Data",
+      "description": "Encryption, classification, and data loss prevention",
+      "domains": [
+        {
+          "name": "Encryption Controls",
+          "icon": "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z",
+          "controls": [
+            {
+              "name": "Data at Rest Encryption",
+              "items": [
+                "Enable Storage Service Encryption",
+                "Use customer-managed keys where possible",
+                "Implement Azure Disk Encryption for VMs",
+                "Rotate encryption keys regularly"
+              ],
+              "maturity": ["Basic", "Intermediate"]
+            },
+            {
+              "name": "Data in Transit Encryption",
+              "items": [
+                "Enforce TLS 1.2+ for all services",
+                "Use HTTPS for all web traffic",
+                "Implement IPsec for cross-premises connectivity",
+                "Disable weak protocols (SSLv3, TLS 1.0/1.1)"
+              ],
+              "maturity": ["Basic", "Intermediate"]
+            },
+            {
+              "name": "Key Management",
+              "items": [
+                "Use Azure Key Vault for key storage",
+                "Implement key rotation policies",
+                "Enable purge protection",
+                "Restrict access to keys"
+              ],
+              "maturity": ["Intermediate", "Advanced"]
+            }
+          ]
+        },
+        {
+          "name": "Data Governance",
+          "icon": "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
+          "controls": [
+            {
+              "name": "Data Classification",
+              "items": [
+                "Implement Microsoft Purview",
+                "Tag data by sensitivity level",
+                "Automate classification where possible",
+                "Apply retention policies"
+              ],
+              "maturity": ["Intermediate", "Advanced"]
+            },
+            {
+              "name": "Data Loss Prevention",
+              "items": [
+                "Configure DLP policies for sensitive data",
+                "Monitor for unauthorized data transfers",
+                "Implement rights management",
+                "Educate users on data handling"
+              ],
+              "maturity": ["Intermediate", "Advanced"]
+            },
+            {
+              "name": "Backup & Recovery",
+              "items": [
+                "Implement 3-2-1 backup strategy",
+                "Test restore procedures regularly",
+                "Protect backup data with MFA",
+                "Monitor backup job failures"
+              ],
+              "maturity": ["Basic", "Intermediate"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "appsec",
+      "name": "App Security",
+      "description": "Securing applications throughout the development lifecycle",
+      "domains": [
+        {
+          "name": "Secure Development",
+          "icon": "M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4",
+          "controls": [
+            {
+              "name": "Secure CI/CD Pipeline",
+              "items": [
+                "Scan for secrets in code",
+                "Integrate SAST/DAST tools",
+                "Implement approval gates",
+                "Use service principals with least privilege"
+              ],
+              "maturity": ["Intermediate", "Advanced"]
+            },
+            {
+              "name": "API Security",
+              "items": [
+                "Implement API Management",
+                "Enforce rate limiting",
+                "Validate all inputs",
+                "Use OAuth 2.0 for authorization"
+              ],
+              "maturity": ["Intermediate", "Advanced"]
+            },
+            {
+              "name": "Container Security",
+              "items": [
+                "Scan container images for vulnerabilities",
+                "Use minimal base images",
+                "Implement pod security policies",
+                "Monitor runtime behavior"
+              ],
+              "maturity": ["Intermediate", "Advanced"]
+            }
+          ]
+        },
+        {
+          "name": "Runtime Protection",
+          "icon": "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+          "controls": [
+            {
+              "name": "Azure Defender",
+              "items": [
+                "Enable for all relevant resources",
+                "Configure alerts for critical findings",
+                "Integrate with SIEM",
+                "Review recommendations regularly"
+              ],
+              "maturity": ["Basic", "Intermediate"]
+            },
+            {
+              "name": "Secrets Management",
+              "items": [
+                "Store secrets in Key Vault",
+                "Rotate secrets automatically",
+                "Audit access to secrets",
+                "Use managed identities where possible"
+              ],
+              "maturity": ["Intermediate", "Advanced"]
+            },
+            {
+              "name": "Workload Protection",
+              "items": [
+                "Implement Azure Policy for compliance",
+                "Use Azure Bastion for VM access",
+                "Enable Just-In-Time VM access",
+                "Monitor for suspicious activities"
+              ],
+              "maturity": ["Intermediate", "Advanced"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "monitoring",
+      "name": "Monitoring",
+      "description": "Visibility, alerting, and incident response capabilities",
+      "domains": [
+        {
+          "name": "Logging & Visibility",
+          "icon": "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z",
+          "controls": [
+            {
+              "name": "Centralized Logging",
+              "items": [
+                "Enable Azure Monitor for all resources",
+                "Send logs to Log Analytics workspace",
+                "Retain logs for compliance period",
+                "Archive to storage for long retention"
+              ],
+              "maturity": ["Basic", "Intermediate"]
+            },
+            {
+              "name": "Activity Log Monitoring",
+              "items": [
+                "Export activity logs to SIEM",
+                "Alert on critical activities",
+                "Monitor for suspicious RBAC changes",
+                "Track resource deletions"
+              ],
+              "maturity": ["Basic", "Intermediate"]
+            },
+            {
+              "name": "Network Flow Logs",
+              "items": [
+                "Enable NSG flow logs",
+                "Analyze with Traffic Analytics",
+                "Monitor for anomalous traffic patterns",
+                "Integrate with security monitoring"
+              ],
+              "maturity": ["Intermediate", "Advanced"]
+            }
+          ]
+        },
+        {
+          "name": "Threat Detection",
+          "icon": "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z",
+          "controls": [
+            {
+              "name": "Microsoft Defender Suite",
+              "items": [
+                "Enable Defender for Cloud",
+                "Configure Defender plans for resources",
+                "Review secure score recommendations",
+                "Automate remediation where possible"
+              ],
+              "maturity": ["Basic", "Intermediate"]
+            },
+            {
+              "name": "SIEM Integration",
+              "items": [
+                "Integrate with Azure Sentinel",
+                "Create detection rules for threats",
+                "Automate incident response",
+                "Hunt for advanced threats"
+              ],
+              "maturity": ["Intermediate", "Advanced"]
+            },
+            {
+              "name": "Threat Intelligence",
+              "items": [
+                "Enable threat intelligence feeds",
+                "Block known malicious IPs",
+                "Monitor for IOCs in logs",
+                "Update detection rules regularly"
+              ],
+              "maturity": ["Intermediate", "Advanced"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "governance",
+      "name": "Governance",
+      "description": "Policies, standards, and compliance management",
+      "domains": [
+        {
+          "name": "Policy & Standards",
+          "icon": "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2",
+          "controls": [
+            {
+              "name": "Azure Policy",
+              "items": [
+                "Implement organizational policies",
+                "Use built-in policy definitions",
+                "Create custom policies as needed",
+                "Enforce compliance at scale"
+              ],
+              "maturity": ["Basic", "Intermediate"]
+            },
+            {
+              "name": "Resource Organization",
+              "items": [
+                "Implement consistent naming",
+                "Use management groups hierarchy",
+                "Apply tags for cost management",
+                "Standardize resource locations"
+              ],
+              "maturity": ["Basic", "Intermediate"]
+            },
+            {
+              "name": "Cost Management",
+              "items": [
+                "Set budget alerts",
+                "Review cost recommendations",
+                "Implement chargeback/showback",
+                "Right-size underutilized resources"
+              ],
+              "maturity": ["Basic", "Intermediate"]
+            }
+          ]
+        },
+        {
+          "name": "Compliance Management",
+          "icon": "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z",
+          "controls": [
+            {
+              "name": "Regulatory Compliance",
+              "items": [
+                "Use Microsoft Compliance Manager",
+                "Implement compliance benchmarks",
+                "Automate compliance evidence collection",
+                "Conduct regular audits"
+              ],
+              "maturity": ["Intermediate", "Advanced"]
+            },
+            {
+              "name": "Access Reviews",
+              "items": [
+                "Review privileged access regularly",
+                "Automate access certification",
+                "Remove stale accounts",
+                "Monitor for privilege creep"
+              ],
+              "maturity": ["Basic", "Intermediate"]
+            },
+            {
+              "name": "Third-Party Risk",
+              "items": [
+                "Assess vendor security posture",
+                "Monitor Marketplace app permissions",
+                "Review external user access",
+                "Implement cross-tenant policies"
+              ],
+              "maturity": ["Intermediate", "Advanced"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "compliance",
+      "name": "Compliance",
+      "description": "Industry standards and regulatory requirements",
+      "domains": [
+        {
+          "name": "Standards Implementation",
+          "icon": "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+          "controls": [
+            {
+              "name": "ISO 27001",
+              "items": [
+                "Implement Azure ISO 27001 blueprint",
+                "Document ISMS policies",
+                "Conduct risk assessments",
+                "Prepare for certification audits"
+              ],
+              "maturity": ["Intermediate", "Advanced"]
+            },
+            {
+              "name": "NIST CSF",
+              "items": [
+                "Map controls to NIST framework",
+                "Implement NIST SP 800-53 controls",
+                "Conduct gap assessments",
+                "Automate compliance monitoring"
+              ],
+              "maturity": ["Intermediate", "Advanced"]
+            },
+            {
+              "name": "CIS Benchmarks",
+              "items": [
+                "Apply CIS hardened images",
+                "Implement CIS benchmark policies",
+                "Monitor for benchmark deviations",
+                "Automate remediation"
+              ],
+              "maturity": ["Basic", "Intermediate"]
+            }
+          ]
+        },
+        {
+          "name": "Industry Regulations",
+          "icon": "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4",
+          "controls": [
+            {
+              "name": "GDPR",
+              "items": [
+                "Implement data subject rights processes",
+                "Document data processing activities",
+                "Enable privacy features in Azure",
+                "Conduct DPIAs for high-risk processing"
+              ],
+              "maturity": ["Intermediate", "Advanced"]
+            },
+            {
+              "name": "HIPAA",
+              "items": [
+                "Enable Azure HIPAA HITRUST blueprint",
+                "Implement PHI protection controls",
+                "Configure audit logging for PHI access",
+                "Train staff on HIPAA requirements"
+              ],
+              "maturity": ["Intermediate", "Advanced"]
+            },
+            {
+              "name": "PCI DSS",
+              "items": [
+                "Isolate cardholder data environment",
+                "Implement encryption for PAN storage",
+                "Restrict access to payment systems",
+                "Conduct regular vulnerability scans"
               ],
               "maturity": ["Intermediate", "Advanced"]
             }
@@ -35,8 +555,8 @@
     }
   ],
   "metadata": {
-    "lastUpdated": "2023-08-01",
+    "lastUpdated": "2025",
     "version": "2.0",
-    "author": "AWS Security Team"
+    "author": "Azure Security Team"
   }
 }

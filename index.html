@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Security Frameworks</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .platform-card {
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+        .platform-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .azure-card {
+            border-top: 4px solid #0078d4;
+        }
+        .aws-card {
+            border-top: 4px solid #FF9900;
+        }
+        .gcp-card {
+            border-top: 4px solid #4285F4;
+        }
+        .hero {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 4rem 0;
+            margin-bottom: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Cloud Security Frameworks</a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="container text-center">
+            <h1 class="display-4">Cloud Security Reference Architectures</h1>
+            <p class="lead">Comprehensive security controls and best practices for major cloud platforms</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card platform-card azure-card">
+                    <img src="shared/images/azure-logo.png" class="card-img-top p-4" alt="Azure Logo">
+                    <div class="card-body">
+                        <h5 class="card-title">Microsoft Azure</h5>
+                        <p class="card-text">Security controls and best practices for Azure environments</p>
+                        <a href="azure/" class="btn btn-primary">View Azure Framework</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card platform-card aws-card">
+                    <img src="shared/images/aws-logo.png" class="card-img-top p-4" alt="AWS Logo">
+                    <div class="card-body">
+                        <h5 class="card-title">Amazon Web Services</h5>
+                        <p class="card-text">Security controls and best practices for AWS environments</p>
+                        <a href="aws/" class="btn btn-primary">View AWS Framework</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card platform-card gcp-card">
+                    <img src="shared/images/gcp-logo.png" class="card-img-top p-4" alt="GCP Logo">
+                    <div class="card-body">
+                        <h5 class="card-title">Google Cloud Platform</h5>
+                        <p class="card-text">Security controls and best practices for GCP environments</p>
+                        <a href="gcp/" class="btn btn-primary">View GCP Framework</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white mt-5 py-4">
+        <div class="container text-center">
+            <p class="mb-0">Cloud Security Frameworks &copy; 2023</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

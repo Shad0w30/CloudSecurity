@@ -1,1 +1,29 @@
+:root {
+    --aws-orange: #FF9900;
+    --aws-dark: #232F3E;
+    --aws-light: #F2F3F3;
+    --security-red: #D13313;
+    --performance-green: #107C10;
+    --compliance-purple: #881798;
+    --governance-orange: #CA5010;
+}
 
+.aws-header {
+    background: linear-gradient(135deg, var(--aws-orange) 0%, var(--aws-dark) 100%);
+}
+
+.aws-bg {
+    background: linear-gradient(135deg, #f5f9fc 0%, #e0ecf5 100%);
+}
+
+.platform-logo {
+    height: 60px;
+    margin-right: 20px;
+}
+
+.logo-header {
+    display: flex;
+    align-items: center;
+}
+
+/* Additional AWS-specific styles can be added here */

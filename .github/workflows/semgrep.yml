@@ -1,0 +1,33 @@
+name: Semgrep PR Scan
+
+on:
+  pull_request: {}
+  workflow_dispatch: {}
+
+jobs:
+  semgrep:
+    name: Semgrep Code Scan
+    runs-on: ubuntu-latest
+    container:
+      image: returntocorp/semgrep    # use official Semgrep Docker image
+    if: (github.actor != 'dependabot[bot]')
+    permissions:
+      contents: read
+      security-events: write        # needed if you want to upload SARIF results
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Semgrep Scan
+        run: semgrep scan --config auto .         # Adjust --config as needed for your codebase
+
+      # Optional: Save scan results as SARIF for GitHub's security dashboard
+      - name: Run Semgrep with SARIF output (optional)
+        run: semgrep scan --config auto --sarif > semgrep-results.sarif
+
+      - name: Upload SARIF results
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: semgrep-results.sarif
+        if: always()

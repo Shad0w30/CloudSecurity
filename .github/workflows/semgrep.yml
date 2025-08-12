@@ -45,22 +45,3 @@ jobs:
           sarif_file: semgrep-results.sarif
         if: always()
 
-
-
-name: Semgrep HTML Report
-
-on:
-  pull_request: {}
-  workflow_dispatch: {}
-
-jobs:
-  semgrep-html-report:
-    runs-on: ubuntu-latest
-    container:
-      image: returntocorp/semgrep
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Run Semgrep scan (JSON)
-

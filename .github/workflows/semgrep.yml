@@ -19,15 +19,29 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run Semgrep Scan
-        run: semgrep scan --config auto .         # Adjust --config as needed for your codebase
+      - name: Run Semgrep Scan   
+        run: semgrep scan --config auto . --json > semgrep-results.json             # Adjust --config as needed for your codebase
+
+      - name: Convert JSON to HTML report
+        run: |
+          pip install markdown
+          echo '<html><body><h1>Semgrep Report</h1><ul>' > report.html
+          jq -r '.results[] | "<li><b>\(.check_id)</b> in <code>\(.path):\(.start.line)</code><br/>\(.extra.message)</li>"' semgrep-results.json >> report.html
+          echo '</ul></body></html>' >> report.html
+
+      - name: Upload HTML report as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: semgrep-html-report
+          path: report.html
 
       # Optional: Save scan results as SARIF for GitHub's security dashboard
       - name: Run Semgrep with SARIF output (optional)
         run: semgrep scan --config auto --sarif > semgrep-results.sarif
 
-      - name: Upload SARIF results
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: semgrep-results.sarif
-        if: always()
+#      - name: Upload SARIF results
+#        uses: github/codeql-action/upload-sarif@v4
+#        with:
+#          sarif_file: semgrep-results.sarif
+#        if: always()
+
